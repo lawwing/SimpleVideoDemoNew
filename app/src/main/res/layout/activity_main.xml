@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="cn.lawwing.simplevideodemo.MainActivity">
+
+    <Chronometer
+        android:id="@+id/cm_now_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="right|center_vertical"
+        android:paddingRight="16dp"
+        android:textColor="@color/now_time_textcolor"
+        android:textSize="@dimen/now_time_textsize"/>
+
+    <cn.lawwing.simplevideodemo.widget.AutoScrollTextView
+        android:id="@+id/tv_bottom_showtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:textColor="@color/bottom_show_textcolor"
+        android:textSize="@dimen/bottom_show_textsize"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tv_bottom_showtext"
+        android:layout_below="@id/cm_now_time"
+        android:orientation="horizontal">
+
+        <VideoView
+            android:id="@+id/vv_showvideo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"/>
+
+        <ImageView
+            android:id="@+id/iv_showimage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="3"/>
+    </LinearLayout>
+</RelativeLayout>

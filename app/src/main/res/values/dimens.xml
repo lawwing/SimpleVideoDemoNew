@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="now_time_textsize">22sp</dimen>
+    <dimen name="bottom_show_textsize">38sp</dimen>
+</resources>
