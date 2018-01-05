@@ -102,4 +102,8 @@ public class PreSlideImageView extends RelativeLayout {
         isView1 = !isView1;
 
     }
+
+    public boolean isPlaying() {
+        return isPlaying;
+    }
 }

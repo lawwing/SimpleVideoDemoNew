@@ -15,13 +15,13 @@ public class Constants {
      * @link ScrollImageBean
      */
     public static String image_json = "{\"rollimages\":[\n" +
-            "{\"title\":\"image1\", \"path\":\"http://192.168.0.227:8888/test/Chrysanthemum.jpg\"},\n" +
-            "{\"title\":\"image2\", \"path\":\"http://192.168.0.227:8888/test/Desert.jpg\"},\n" +
-            "{\"title\":\"image3\", \"path\":\"http://192.168.0.227:8888/test/Hydrangeas.jpg\"},\n" +
-            "{\"title\":\"image4\", \"path\":\"http://192.168.0.227:8888/test/Jellyfish.jpg\"},\n" +
-            "{\"title\":\"image5\", \"path\":\"http://192.168.0.227:8888/test/Koala.jpg\"},\n" +
-            "{\"title\":\"image6\", \"path\":\"http://192.168.0.227:8888/test/Lighthouse.jpg\"},\n" +
-            "{\"title\":\"image7\", \"path\":\"http://192.168.0.227:8888/test/Penguins.jpg\"},\n" +
-            "{\"title\":\"image8\", \"path\":\"http://192.168.0.227:8888/test/Tulips.jpg\"}\n" +
+            "{\"title\":\"image1\", \"path\":\"" + BASE_URL + "/Chrysanthemum.jpg\"},\n" +
+            "{\"title\":\"image2\", \"path\":\"" + BASE_URL + "/Desert.jpg\"},\n" +
+            "{\"title\":\"image3\", \"path\":\"" + BASE_URL + "/Hydrangeas.jpg\"},\n" +
+            "{\"title\":\"image4\", \"path\":\"" + BASE_URL + "/Jellyfish.jpg\"},\n" +
+            "{\"title\":\"image5\", \"path\":\"" + BASE_URL + "/Koala.jpg\"},\n" +
+            "{\"title\":\"image6\", \"path\":\"" + BASE_URL + "/Lighthouse.jpg\"},\n" +
+            "{\"title\":\"image7\", \"path\":\"" + BASE_URL + "/Penguins.jpg\"},\n" +
+            "{\"title\":\"image8\", \"path\":\"" + BASE_URL + "/Tulips.jpg\"}\n" +
             "]}";
 }

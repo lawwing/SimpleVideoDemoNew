@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity implements MainView {
         mPresenter.getInternetText();
         mPresenter.initImageView();
 
-        String videoUrl = "http://192.168.0.227:8888/test/sobigmp4vi_sa7nyhd5.mp4";
+        String videoUrl = Constants.BASE_URL + "/sobigmp4vi_sa7nyhd5.mp4";
         mShowVideo.setVideoPath(videoUrl);
         mShowVideo.start();
     }
@@ -141,7 +141,9 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void changeImageView(String path) {
         // GlideUtils.loadImage(path, R.mipmap.ic_launcher, mShowImage);
-        mShowImage.changeImage();
+        if (mShowImage.isPlaying()) {
+            mShowImage.changeImage();
+        }
     }
 
 
