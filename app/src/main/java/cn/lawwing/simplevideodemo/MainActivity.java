@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Chronometer;
-import android.widget.ImageView;
 import android.widget.VideoView;
 
 import com.google.gson.Gson;
@@ -22,10 +21,10 @@ import cn.lawwing.simplevideodemo.commen.Constants;
 import cn.lawwing.simplevideodemo.network.OkhttpUtils;
 import cn.lawwing.simplevideodemo.presenter.MainPresenter;
 import cn.lawwing.simplevideodemo.presenter.MainPresenterImpl;
-import cn.lawwing.simplevideodemo.utils.GlideUtils;
 import cn.lawwing.simplevideodemo.utils.TimeUtils;
 import cn.lawwing.simplevideodemo.view.MainView;
 import cn.lawwing.simplevideodemo.widget.AutoScrollTextView;
+import cn.lawwing.simplevideodemo.widget.PreSlideImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
@@ -37,7 +36,7 @@ public class MainActivity extends BaseActivity implements MainView {
     @BindView(R.id.tv_bottom_showtext)
     AutoScrollTextView mShowText;
     @BindView(R.id.iv_showimage)
-    ImageView mShowImage;
+    PreSlideImageView mShowImage;
     @BindView(R.id.vv_showvideo)
     VideoView mShowVideo;
     Unbinder unbinder;
@@ -45,7 +44,7 @@ public class MainActivity extends BaseActivity implements MainView {
     private MainPresenter mPresenter;
     private int i = 0;
     //更改图片的时间
-    private static final int CHANGE_IMAGE_TIME = 10;
+    private static final int CHANGE_IMAGE_TIME = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,12 +130,18 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void initImageView(ScrollImageBean imgDatas) {
-        GlideUtils.loadImage(imgDatas.getRollimages().get(0).getPath(), R.mipmap.ic_launcher, mShowImage);
+        //GlideUtils.loadImage(imgDatas.getRollimages().get(0).getPath(), R.mipmap.ic_launcher, mShowImage);
+        ArrayList<String> imageUrls = new ArrayList<>();
+        for (ScrollImageBean.RollimagesBean bean : imgDatas.getRollimages()) {
+            imageUrls.add(bean.getPath());
+        }
+        mShowImage.playImages(imageUrls);
     }
 
     @Override
     public void changeImageView(String path) {
-        GlideUtils.loadImage(path, R.mipmap.ic_launcher, mShowImage);
+        // GlideUtils.loadImage(path, R.mipmap.ic_launcher, mShowImage);
+        mShowImage.changeImage();
     }
 
 
