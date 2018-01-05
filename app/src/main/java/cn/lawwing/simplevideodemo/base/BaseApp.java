@@ -1,14 +1,14 @@
 package cn.lawwing.simplevideodemo.base;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 /**
  * Created by Administrator on 2018/1/4 0004.
  */
 
-public class BaseApp extends Application {
+public class BaseApp extends MultiDexApplication {
     private static Context context;
 
     @Override
