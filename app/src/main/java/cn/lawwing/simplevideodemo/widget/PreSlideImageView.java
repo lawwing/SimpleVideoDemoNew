@@ -69,8 +69,8 @@ public class PreSlideImageView extends RelativeLayout {
     public void playImages(ArrayList<String> imageUrls) {
         isPlaying = true;
         this.imageUrls = imageUrls;
-        GlideUtils.loadImage(imageUrls.get(0), R.mipmap.ic_launcher, imageView1);
-        GlideUtils.loadImage(imageUrls.get(1), R.mipmap.ic_launcher, imageView2);
+        GlideUtils.loadImage(imageUrls.get(0), R.drawable.default_error, imageView1);
+        GlideUtils.loadImage(imageUrls.get(1), R.drawable.default_error, imageView2);
         imageView1.setVisibility(VISIBLE);
         imageView2.setVisibility(GONE);
         imagePoi = 1;
@@ -92,12 +92,12 @@ public class PreSlideImageView extends RelativeLayout {
             //如果iv1显示,改变图片的时候，就吧iv1隐藏，iv2显示出来，并且加载下一张图片到iv1
             imageView1.setVisibility(GONE);
             imageView2.setVisibility(VISIBLE);
-            GlideUtils.loadImage(imageUrls.get(imagePoi), R.mipmap.ic_launcher, imageView1);
+            GlideUtils.loadImage(imageUrls.get(imagePoi), R.drawable.default_error, imageView1);
         } else {
             //如果iv1隐藏,改变图片的时候，就吧iv2隐藏，iv1显示出来，并且加载下一张图片到iv2
             imageView1.setVisibility(VISIBLE);
             imageView2.setVisibility(GONE);
-            GlideUtils.loadImage(imageUrls.get(imagePoi), R.mipmap.ic_launcher, imageView2);
+            GlideUtils.loadImage(imageUrls.get(imagePoi), R.drawable.default_error, imageView2);
         }
         isView1 = !isView1;
 
