@@ -10,6 +10,7 @@ import android.widget.VideoView;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,6 @@ import cn.lawwing.simplevideodemo.network.OkhttpUtils;
 import cn.lawwing.simplevideodemo.presenter.MainPresenter;
 import cn.lawwing.simplevideodemo.presenter.MainPresenterImpl;
 import cn.lawwing.simplevideodemo.utils.GlideUtils;
-import cn.lawwing.simplevideodemo.utils.RandomUtils;
 import cn.lawwing.simplevideodemo.utils.TimeUtils;
 import cn.lawwing.simplevideodemo.view.MainView;
 import cn.lawwing.simplevideodemo.widget.AutoScrollTextView;
@@ -114,7 +114,11 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void initBottomView(ShowTextBean showTextBean) {
-        mShowText.initScrollTextView(MainActivity.this.getWindowManager(), showTextBean.getRollmsg().get(RandomUtils.getRandom(0, 2)).getText(), 1.2);
+        ArrayList<String> textDatas = new ArrayList<>();
+        for (ShowTextBean.RollmsgBean bean : showTextBean.getRollmsg()) {
+            textDatas.add(bean.getText());
+        }
+        mShowText.initScrollTextView(MainActivity.this.getWindowManager(), textDatas, 1.2);
         mShowText.starScroll();
     }
 

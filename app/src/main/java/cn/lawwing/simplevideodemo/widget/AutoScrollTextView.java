@@ -6,12 +6,17 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.util.ArrayList;
+
 import cn.lawwing.simplevideodemo.R;
+import cn.lawwing.simplevideodemo.utils.RandomUtils;
 
 /**
+ * 自动滚动文字控件
  * Created by Administrator on 2018/1/4 0004.
  */
 
@@ -56,6 +61,8 @@ public class AutoScrollTextView extends AppCompatTextView {
      * 滚动速度，默认是1.0，数值越大速度越大，speed大于0.1
      */
     private double speed = 1.0;
+    private ArrayList<String> textDatas = new ArrayList<>();
+    private WindowManager windowManager;
 
     public AutoScrollTextView(Context context) {
         super(context);
@@ -76,12 +83,15 @@ public class AutoScrollTextView extends AppCompatTextView {
      * @param text          显示的内容
      * @param speed         滚动速度，默认是1.0，数值越大速度越大，speed大于0.1
      */
-    public void initScrollTextView(WindowManager windowManager, String text, double speed) {
+    public void initScrollTextView(WindowManager windowManager, ArrayList<String> textDatas, double speed) {
         this.speed = speed;
         // 得到画笔,获取父类的textPaint
         paint = this.getPaint();
         // 得到文字
-        this.text = text;
+        this.textDatas = textDatas;
+        this.windowManager = windowManager;
+
+        text = textDatas.get(RandomUtils.getRandom(0, textDatas.size() - 1));
 
         textLength = paint.measureText(text);// 获得当前文本字符串长度
         viewWidth = this.getWidth();// 获取宽度return mRight - mLeft;
@@ -101,7 +111,7 @@ public class AutoScrollTextView extends AppCompatTextView {
     }
 
     /**
-     * 开始滚动
+     * 开始滚动的方法
      */
     public void starScroll() {
         // 开始滚动
@@ -110,7 +120,7 @@ public class AutoScrollTextView extends AppCompatTextView {
     }
 
     /**
-     * 停止方法,停止滚动
+     * 停止滚动的方法
      */
     public void stopScroll() {
         // 停止滚动
@@ -120,18 +130,27 @@ public class AutoScrollTextView extends AppCompatTextView {
 
     /**
      * 重写onDraw方法
+     * <p>
+     * 调用invalidate方法则会进入此方法
      */
     @Override
     protected void onDraw(Canvas canvas) {
+        /**
+         * 如果已经开始(isStarting为true)，则无限执行下面方法，达到文字滚动的效果
+         */
         if (isStarting) {
-            // A-Alpha透明度/R-Read红色/g-Green绿色/b-Blue蓝色
             paint.setColor(getResources().getColor(R.color.bottom_show_textcolor));
+            paint.setAntiAlias(true);
             canvas.drawText(text, temp_tx1 - tx, ty, paint);
             tx += speed;
-            // 当文字滚动到屏幕的最左边
+            //一行文字滚动完之后进入下面方法
             if (tx >= temp_tx2) {
                 // 把文字设置到最右边开始
                 tx = temp_tx1 - viewWidth;
+                if (windowManager != null) {
+                    initScrollTextView(windowManager, textDatas, speed);
+                    Log.e("lawwing", "这个是我的");
+                }
             }
             this.invalidate();// 刷新屏幕
         }
