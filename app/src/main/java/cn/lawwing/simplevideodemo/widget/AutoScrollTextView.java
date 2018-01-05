@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 
 import cn.lawwing.simplevideodemo.R;
-import cn.lawwing.simplevideodemo.utils.RandomUtils;
 
 /**
  * 自动滚动文字控件
@@ -62,6 +61,7 @@ public class AutoScrollTextView extends AppCompatTextView {
     private double speed = 1.0;
     private ArrayList<String> textDatas = new ArrayList<>();
     private WindowManager windowManager;
+    private int poi = -1;
 
     public AutoScrollTextView(Context context) {
         super(context);
@@ -79,7 +79,7 @@ public class AutoScrollTextView extends AppCompatTextView {
      * 初始化自动滚动条,每次改变文字内容时，都需要重新初始化一次
      *
      * @param windowManager 获取屏幕
-     * @param text          显示的内容
+     * @param textDatas     显示的内容
      * @param speed         滚动速度，默认是1.0，数值越大速度越大，speed大于0.1
      */
     public void initScrollTextView(WindowManager windowManager, ArrayList<String> textDatas, double speed) {
@@ -89,8 +89,12 @@ public class AutoScrollTextView extends AppCompatTextView {
         // 得到文字
         this.textDatas = textDatas;
         this.windowManager = windowManager;
-
-        text = textDatas.get(RandomUtils.getRandom(0, textDatas.size() - 1));
+        if (poi < textDatas.size() - 1) {
+            poi++;
+        } else {
+            poi = 0;
+        }
+        text = textDatas.get(poi);
 
         textLength = paint.measureText(text);// 获得当前文本字符串长度
         viewWidth = this.getWidth();// 获取宽度return mRight - mLeft;
