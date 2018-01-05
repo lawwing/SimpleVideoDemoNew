@@ -72,7 +72,8 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
         mPresenter.getInternetText();
         mPresenter.initImageView();
         mPresenter.initVideoView();
-
+        //使视频循环播放,一进去就播放视频
+        mPresenter.playVideo();
     }
 
 
@@ -130,7 +131,7 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
                 textDatas.add(bean.getText());
             }
         }
-        mShowText.initScrollTextView(MainActivity.this.getWindowManager(), textDatas, 1.2);
+        mShowText.initScrollTextView(MainActivity.this.getWindowManager(), textDatas, 6);
         mShowText.starScroll();
     }
 
@@ -215,5 +216,6 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
     public void onCompletion(MediaPlayer mp) {
         isFinishvideo = true;
         mPresenter.stopVideo();
+        mPresenter.playVideo();
     }
 }
