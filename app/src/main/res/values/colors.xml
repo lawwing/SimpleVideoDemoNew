@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="now_time_textcolor">#000000</color>
     <color name="bottom_show_textcolor">#00008B</color>
+    <color name="video_bgcolor">#000000</color>
 </resources>

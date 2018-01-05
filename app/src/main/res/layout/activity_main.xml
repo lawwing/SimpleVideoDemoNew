@@ -35,11 +35,26 @@
         android:layout_below="@id/cm_now_time"
         android:orientation="horizontal">
 
-        <VideoView
-            android:id="@+id/vv_showvideo"
+        <RelativeLayout
+            android:id="@+id/rl_showvideo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"/>
+            android:background="@color/video_bgcolor"
+            android:layout_weight="5">
+
+            <VideoView
+                android:id="@+id/vv_showvideo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:id="@+id/iv_playvideo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/ic_launcher_round"/>
+        </RelativeLayout>
+
 
         <cn.lawwing.simplevideodemo.widget.PreSlideImageView
             android:id="@+id/iv_showimage"

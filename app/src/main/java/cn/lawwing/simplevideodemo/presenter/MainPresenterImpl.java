@@ -59,4 +59,24 @@ public class MainPresenterImpl implements MainPresenter {
         List<ScrollImageBean.RollimagesBean> rollimagesBeens = mainView.getImageData().getRollimages();
         mainView.changeImageView(rollimagesBeens.get(RandomUtils.getRandom(0, rollimagesBeens.size() - 1)).getPath());
     }
+
+    @Override
+    public void initVideoView() {
+        mainView.preVideoView(mainView.getVideoPath());
+    }
+
+    @Override
+    public void playVideo() {
+        mainView.playVideo(mainView.getVideoPath());
+    }
+
+    @Override
+    public void stopVideo() {
+        mainView.stopVideo();
+    }
+
+    @Override
+    public void pauseVideo() {
+        mainView.pauseVideo();
+    }
 }

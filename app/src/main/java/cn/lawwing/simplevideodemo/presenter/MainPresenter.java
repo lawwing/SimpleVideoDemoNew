@@ -45,4 +45,24 @@ public interface MainPresenter {
      * 更换图片
      */
     void changeImageView();
+
+    /**
+     * 初始化视频控件
+     */
+    void initVideoView();
+
+    /**
+     * 播放视频
+     */
+    void playVideo();
+
+    /**
+     * 停止播放
+     */
+    void stopVideo();
+
+    /**
+     * 暂停播放
+     */
+    void pauseVideo();
 }

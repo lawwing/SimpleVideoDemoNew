@@ -53,4 +53,32 @@ public interface MainView {
      */
     void changeImageView(String path);
 
+    /**
+     * 获取视频的路劲
+     */
+    String getVideoPath();
+
+    /**
+     * 预加载视频
+     *
+     * @param videoPath
+     */
+    void preVideoView(String videoPath);
+
+    /**
+     * 播放视频
+     *
+     * @param videoPath
+     */
+    void playVideo(String videoPath);
+
+    /**
+     * 停止播放
+     */
+    void stopVideo();
+
+    /**
+     * 暂停播放
+     */
+    void pauseVideo();
 }
