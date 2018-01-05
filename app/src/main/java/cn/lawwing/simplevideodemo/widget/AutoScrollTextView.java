@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -149,7 +148,6 @@ public class AutoScrollTextView extends AppCompatTextView {
                 tx = temp_tx1 - viewWidth;
                 if (windowManager != null) {
                     initScrollTextView(windowManager, textDatas, speed);
-                    Log.e("lawwing", "这个是我的");
                 }
             }
             this.invalidate();// 刷新屏幕
