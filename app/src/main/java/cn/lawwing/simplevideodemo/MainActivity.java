@@ -2,6 +2,7 @@ package cn.lawwing.simplevideodemo;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -72,8 +73,6 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
         mPresenter.getInternetText();
         mPresenter.initImageView();
         mPresenter.initVideoView();
-        //使视频循环播放,一进去就播放视频
-        mPresenter.playVideo();
     }
 
 
@@ -165,6 +164,7 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
 
     @Override
     public void preVideoView(String videoPath) {
+        Log.e("lawwing", "preVideoView");
         mShowVideo.setVideoPath(videoPath);
         mShowVideo.setOnCompletionListener(this);
         mShowVideo.setMediaController(new MediaController(this));
@@ -172,8 +172,10 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
 
     @Override
     public void playVideo(String videoPath) {
+        Log.e("lawwing", "playVideo");
         mPlayVideoImageBtn.setVisibility(View.GONE);
         if (isFinishvideo) {
+            Log.e("lawwing", "setVideoPath");
             mShowVideo.setVideoPath(videoPath);
         }
         mShowVideo.start();
@@ -182,12 +184,15 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
 
     @Override
     public void stopVideo() {
+
+        Log.e("lawwing", "stopVideo");
         mPlayVideoImageBtn.setVisibility(View.VISIBLE);
         mShowVideo.stopPlayback();
     }
 
     @Override
     public void pauseVideo() {
+        Log.e("lawwing", "pauseVideo");
         // mPlayVideoImageBtn.setVisibility(View.VISIBLE);
         mShowVideo.pause();
     }
@@ -214,8 +219,28 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
 
     @Override
     public void onCompletion(MediaPlayer mp) {
+        Log.e("lawwing", "onCompletion");
         isFinishvideo = true;
         mPresenter.stopVideo();
         mPresenter.playVideo();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.e("lawwing", "onPause");
+        super.onPause();
+        if (mShowVideo.isPlaying()) {
+            mPresenter.pauseVideo();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        Log.e("lawwing", "onResume");
+        super.onResume();
+        if (!mShowVideo.isPlaying()) {
+            //使视频循环播放,一进去就播放视频
+            mPresenter.playVideo();
+        }
     }
 }
