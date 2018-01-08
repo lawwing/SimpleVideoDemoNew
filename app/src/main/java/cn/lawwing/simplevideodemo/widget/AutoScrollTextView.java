@@ -30,19 +30,19 @@ public class AutoScrollTextView extends AppCompatTextView {
     /**
      * 文本x轴 的坐标
      */
-    private float tx = 0f;
+    private float textX = 0f;
     /**
      * 文本Y轴的坐标
      */
-    private float ty = 0f;
+    private float textY = 0f;
     /**
      * 文本当前长度
      */
-    private float temp_tx1 = 0.0f;
+    private float tempTextX1 = 0.0f;
     /**
      * 文本当前变换的长度
      */
-    private float temp_tx2 = 0x0f;
+    private float tempTextX2 = 0x0f;
     /**
      * 文本滚动开关
      */
@@ -50,7 +50,7 @@ public class AutoScrollTextView extends AppCompatTextView {
     /**
      * 画笔对象
      */
-    private Paint paint = null;
+    private Paint paint;
     /**
      * 显示的文字
      */
@@ -59,8 +59,14 @@ public class AutoScrollTextView extends AppCompatTextView {
      * 滚动速度，默认是1.0，数值越大速度越大，speed大于0.1
      */
     private double speed = 1.0;
+    /**
+     * 传入的数组集合
+     */
     private ArrayList<String> textDatas = new ArrayList<>();
     private WindowManager windowManager;
+    /**
+     * 播放的字幕的位置（第几条）
+     */
     private int poi = -1;
 
     public AutoScrollTextView(Context context) {
@@ -86,7 +92,7 @@ public class AutoScrollTextView extends AppCompatTextView {
         this.speed = speed;
         // 得到画笔,获取父类的textPaint
         paint = this.getPaint();
-        // 得到文字
+        // 得到文字集合
         this.textDatas = textDatas;
         this.windowManager = windowManager;
         if (poi < textDatas.size() - 1) {
@@ -94,6 +100,7 @@ public class AutoScrollTextView extends AppCompatTextView {
         } else {
             poi = 0;
         }
+        //获取当前文字
         text = textDatas.get(poi);
 
         textLength = paint.measureText(text);// 获得当前文本字符串长度
@@ -106,11 +113,11 @@ public class AutoScrollTextView extends AppCompatTextView {
 
             }
         }
-        tx = textLength;
-        temp_tx1 = viewWidth + textLength;
-        temp_tx2 = viewWidth + textLength * 2;// 自己定义，文字变化多少
+        textX = textLength;
+        tempTextX1 = viewWidth + textLength;
+        tempTextX2 = viewWidth + textLength * 2;// 自己定义，文字变化多少
         // 文字的大小+距顶部的距离
-        ty = this.getTextSize() + this.getPaddingTop();
+        textY = this.getTextSize() + this.getPaddingTop();
     }
 
     /**
@@ -144,17 +151,18 @@ public class AutoScrollTextView extends AppCompatTextView {
         if (isStarting) {
             paint.setColor(getResources().getColor(R.color.bottom_show_textcolor));
             paint.setAntiAlias(true);
-            canvas.drawText(text, temp_tx1 - tx, ty, paint);
-            tx += speed;
+            canvas.drawText(text, tempTextX1 - textX, textY, paint);
+            textX += speed;
             //一行文字滚动完之后进入下面方法
-            if (tx >= temp_tx2) {
+            if (textX >= tempTextX2) {
                 // 把文字设置到最右边开始
-                tx = temp_tx1 - viewWidth;
+                textX = tempTextX1 - viewWidth;
                 if (windowManager != null) {
                     initScrollTextView(windowManager, textDatas, speed);
                 }
             }
-            this.invalidate();// 刷新屏幕
+            // 刷新屏幕
+            this.invalidate();
         }
         super.onDraw(canvas);
     }
