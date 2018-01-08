@@ -54,10 +54,16 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
 
     private MainPresenter mPresenter;
     private int i = 0;
-    //更改图片的时间
+    /**
+     * 更改图片的时间
+     */
     private static final int CHANGE_IMAGE_TIME = 5;
 
     private boolean isFinishvideo = false;
+    /**
+     * 记录视频播放到的位置
+     */
+    private int videoPoi = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +184,7 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
             Log.e("lawwing", "setVideoPath");
             mShowVideo.setVideoPath(videoPath);
         }
+        mShowVideo.seekTo(videoPoi);
         mShowVideo.start();
         isFinishvideo = false;
     }
@@ -231,6 +238,7 @@ public class MainActivity extends BaseActivity implements MainView, MediaPlayer.
         super.onPause();
         if (mShowVideo.isPlaying()) {
             mPresenter.pauseVideo();
+            videoPoi = mShowVideo.getCurrentPosition();
         }
     }
 
